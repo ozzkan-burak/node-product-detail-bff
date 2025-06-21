@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const products = require('../services/productService').products;
 
 router.get('/products/:id', (req, res) => {
   const product = req.params.id;
