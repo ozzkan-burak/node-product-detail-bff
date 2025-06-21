@@ -1,0 +1,20 @@
+{
+  "name": "product-detail-bff",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozzkan-burak/node-product-detail-bff.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ozzkan-burak/node-product-detail-bff/issues"
+  },
+  "homepage": "https://github.com/ozzkan-burak/node-product-detail-bff#readme",
+  "description": ""
+}
