@@ -36,3 +36,5 @@ const products = {
     imageUrl: 'https://example.com/headphone-y.jpg',
   },
 };
+
+module.exports = products;

@@ -27,6 +27,10 @@ app.get('/api/products/:id', async (req, res) => {
     const stock = stockResponse.data;
     const reviews = reviewResponse.data;
 
+    console.log('Product:', product);
+    console.log('Stock:', stock);
+    console.log('Reviews:', reviews);
+
     const productDetail = {
       id: product.id,
       name: product.name,
