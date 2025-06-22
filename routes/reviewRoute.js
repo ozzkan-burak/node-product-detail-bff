@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const reviews = require('../services/reviewService').reviews;
+const reviews = require('../services/reviewService');
 
 router.get('/reviews/:productId', (req, res) => {
   const productReviews = reviews[req.params.productId] || [];

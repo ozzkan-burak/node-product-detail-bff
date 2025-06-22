@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-services": "node index.js",
+    "start-bff": "node bff.js",
+    "start": "npm run start-services & npm run start-bff"
   },
   "repository": {
     "type": "git",

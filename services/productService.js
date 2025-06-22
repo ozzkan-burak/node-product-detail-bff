@@ -1,4 +1,4 @@
-export const products = {
+const products = {
   123: {
     id: '123',
     name: 'Akıllı Telefon X',

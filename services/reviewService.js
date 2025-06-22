@@ -1,4 +1,4 @@
-export const reviews = {
+const reviews = {
   123: [
     {
       id: 'r1',

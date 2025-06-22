@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const products = require('../services/productService').products;
+const products = require('../services/productService');
 
 router.get('/products/:id', (req, res) => {
-  const product = req.params.id;
+  const product = products[req.params.id];
   if (product) {
     res.json(product);
   } else {
