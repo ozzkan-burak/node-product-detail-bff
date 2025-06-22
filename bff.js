@@ -1,8 +1,9 @@
 require('dotenv').config();
+const path = require('path');
 
-const exxpress = require('express');
+const express = require('express');
 const axios = require('axios');
-const app = exxpress();
+const app = express();
 const PORT = process.env.BFF_PORT || 3000;
 
 const PRODUCT_SERVICE_PORT = process.env.PRODUCT_SERVICE_PORT || 3001;
@@ -62,6 +63,7 @@ app.get('/api/products/:id', async (req, res) => {
     }
   }
 });
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () => {
   console.log(`BFF servisi http://localhost:${PORT} adresinde çalışıyor.`);
