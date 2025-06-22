@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ürün Detay Sayfası</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .product-detail {
+        border: 1px solid #ccc;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+      }
+      .product-image {
+        max-width: 100%;
+        height: auto;
+      }
+      .reviews {
+        margin-top: 20px;
+      }
+      .review {
+        border-bottom: 1px dashed #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+      .rating {
+        font-weight: bold;
+        color: gold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ürün Detay Sayfası</h1>
+    <p>Ürün ID: <input type="text" id="productIdInput" value="123" /></p>
+    <button onclick="getProductDetail()">Ürün Detayını Getir</button>
+    <div id="productDetailContainer" class="product-detail">
+      <p>Lütfen bir ürün ID girip "Ürün Detayını Getir" butonuna tıklayın.</p>
+    </div>
+
+    <script>
+      async function getProductDetail() {
+        const productId = document.getElementById('productIdInput').value;
+        const container = document.getElementById('productDetailContainer');
+        container.innerHTML = '<p>Yükleniyor...</p>';
+
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/products/${productId}`
+          );
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Ürün detayı alınamadı.');
+          }
+          const product = await response.json();
+
+          let reviewsHtml = product.reviews
+            .map(
+              (review) => `
+                    <div class="review">
+                        <strong>Kullanıcı: ${review.user}</strong> - <span class="rating">${'★'.repeat(review.rating)}</span><br>
+                        <p>${review.comment}</p>
+                    </div>
+                `
+            )
+            .join('');
+
+          container.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                    <p><strong>Fiyat:</strong> ${product.price} ${product.currency}</p>
+                    <p><strong>Açıklama:</strong> ${product.description}</p>
+                    <p><strong>Stok Durumu:</strong> ${product.stock.inStock ? 'Stokta Var' : 'Stokta Yok'} (${product.stock.quantity} adet)</p>
+                    <p><strong>Ortalama Puan:</strong> ${product.averageRating} (${product.reviews.length} yorum)</p>
+                    <div class="reviews">
+                        <h3>Yorumlar</h3>
+                        ${reviewsHtml || '<p>Bu ürün için henüz yorum bulunmamaktadır.</p>'}
+                    </div>
+                `;
+        } catch (error) {
+          console.error('Hata:', error);
+          container.innerHTML = `<p style="color: red;">Hata: ${error.message}</p>`;
+        }
+      }
+    </script>
+  </body>
+</html>
