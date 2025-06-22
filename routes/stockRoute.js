@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const stock = require('../services/stockService').stock;
+const stock = require('../services/stockService');
 
 router.get('/stock/:productId', (req, res) => {
   const stockInfo = stock[req.params.productId];
